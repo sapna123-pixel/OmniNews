@@ -9,7 +9,7 @@ function SavedNews() {
     async function fetchSavedNews() {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/saved-news"
+          "https://omninews-qs4j.onrender.com/api/saved-news"
         );
 
         setSavedNews(response.data);
@@ -26,7 +26,7 @@ function SavedNews() {
 
   async function handleDelete(id) {
   try {
-    await axios.delete(`http://localhost:5000/api/saved-news/${id}`);
+    await axios.delete(`https://omninews-qs4j.onrender.com/api/saved-news/${id}`);
 
     setSavedNews(
       savedNews.filter((article) => article._id !== id)

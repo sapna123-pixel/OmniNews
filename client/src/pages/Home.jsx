@@ -39,7 +39,7 @@ function Home() {
         setLoading(true);
 
         const response = await axios.get(
-          `http://localhost:5000/api/news?category=${category}`
+          `https://omninews-qs4j.onrender.com/api/news?category=${category}`
         );
 
         setNews(response.data.articles);
@@ -76,7 +76,7 @@ function Home() {
 
 
       const response = await axios.post(
-        "http://localhost:5000/api/summary",
+        "https://omninews-qs4j.onrender.com/api/summary",
         {
           article: article
         }

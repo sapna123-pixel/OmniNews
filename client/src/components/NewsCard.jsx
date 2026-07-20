@@ -4,7 +4,7 @@ function NewsCard({ article, onSummary }) {
       
     async function handleSave() {
   try {
-    await axios.post("http://localhost:5000/api/saved-news", {
+    await axios.post("https://omninews-qs4j.onrender.com/api/saved-news", {
       title: article.title,
       description: article.description,
       image: article.urlToImage,
