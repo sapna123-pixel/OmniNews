@@ -41,4 +41,8 @@ OmniNews is a MERN stack based AI-powered news application that provides news fr
 - News API
 - AI Summary API
 
+- ## 🌐 Live Demo
+
+https://omninewss.netlify.app/
+
 
