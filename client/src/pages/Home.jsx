@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import NewsCard from "../components/NewsCard";
@@ -27,6 +27,19 @@ function Home() {
   const [summaryError, setSummaryError] = useState("");
 
   const [darkMode, setDarkMode] = useState(false);
+
+
+  const navigate = useNavigate();
+  const username = localStorage.getItem("username");
+
+function handleLogout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+
+  alert("Logged out successfully!");
+
+  navigate("/login");
+}
 
 
 
@@ -140,25 +153,56 @@ function Home() {
     OmniNews
   </Link>
 
-  <Link
-    to="/saved"
-    className={`fw-semibold text-decoration-none ${
-      darkMode ? "text-light" : "text-dark"
-    }`}
-  >
-    ⭐ Saved News
-  </Link>
 
 </div>
 
-<button
-  className={`btn rounded-pill px-4 ${
-    darkMode ? "btn-light" : "btn-dark"
-  }`}
-  onClick={() => setDarkMode(!darkMode)}
->
-  {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-</button>
+<div className="d-flex gap-2">
+  <button
+    className={`btn rounded-pill px-4 ${
+      darkMode ? "btn-light" : "btn-dark"
+    }`}
+    onClick={() => setDarkMode(!darkMode)}
+  >
+    {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+  </button>
+
+
+  {username && (
+  <div className="dropdown">
+    <button
+      className={`btn ${
+        darkMode ? "btn-light" : "btn-dark"
+      } dropdown-toggle`}
+      type="button"
+      data-bs-toggle="dropdown"
+    >
+      👤 {username}
+    </button>
+
+    <ul className="dropdown-menu dropdown-menu-end">
+      <li>
+        <Link className="dropdown-item" to="/saved">
+          ⭐ Saved News
+        </Link>
+      </li>
+
+      <li>
+        <hr className="dropdown-divider" />
+      </li>
+
+      <li>
+        <button
+          className="dropdown-item text-danger"
+          onClick={handleLogout}
+        >
+          🚪 Logout
+        </button>
+      </li>
+    </ul>
+  </div>
+)}
+
+</div>
 
 
         </div>
@@ -172,9 +216,9 @@ function Home() {
       <div className="container mt-4">
 
 
-        <h2 className="fw-bold mb-3">
-          Categories
-        </h2>
+  <h2 className="fw-bold mb-3">
+    Categories
+  </h2>
 
 
 

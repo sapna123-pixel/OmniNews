@@ -1,17 +1,34 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function NewsCard({ article, onSummary }) {
+  const navigate = useNavigate();
       
     async function handleSave() {
+
+      const token = localStorage.getItem("token");
+
+if (!token) {
+  navigate("/login");
+  return;
+}
   try {
-    await axios.post("https://omninews-qs4j.onrender.com/api/saved-news", {
-      title: article.title,
-      description: article.description,
-      image: article.urlToImage,
-      source: article.source?.name,
-      publishedAt: article.publishedAt,
-      url: article.url,
-    });
+    await axios.post(
+  "https://omninews-qs4j.onrender.com/api/saved-news",
+  {
+    title: article.title,
+    description: article.description,
+    image: article.urlToImage,
+    source: article.source?.name,
+    publishedAt: article.publishedAt,
+    url: article.url,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     alert("✅ News saved successfully!");
   } catch (error) {

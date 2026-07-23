@@ -2,11 +2,16 @@ const express = require("express");
 const router = express.Router();
 
 const SavedNews = require("../models/SavedNews");
+const authMiddleware = require("../middleware/authMiddleware");
+
 
 // Save a news article
-router.post("/", async (req, res) => {
+router.post("/", authMiddleware, async (req, res) => {
   try {
-    const savedArticle = new SavedNews(req.body);
+    const savedArticle = new SavedNews({
+      ...req.body,
+      user: req.user.id,
+    });
 
     await savedArticle.save();
 
@@ -14,6 +19,7 @@ router.post("/", async (req, res) => {
       message: "News saved successfully",
       article: savedArticle,
     });
+
   } catch (error) {
     console.log(error);
 
@@ -23,12 +29,20 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get all saved news
-router.get("/", async (req, res) => {
+
+
+// Get logged-in user's saved news
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    const savedNews = await SavedNews.find().sort({ createdAt: -1 });
+
+    const savedNews = await SavedNews.find({
+      user: req.user.id,
+    }).sort({
+      createdAt: -1,
+    });
 
     res.json(savedNews);
+
   } catch (error) {
     console.log(error);
 
@@ -41,14 +55,20 @@ router.get("/", async (req, res) => {
 
 
 
-// Delete saved news
-router.delete("/:id", async (req, res) => {
+// Delete only user's saved news
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    await SavedNews.findByIdAndDelete(req.params.id);
+
+    await SavedNews.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user.id,
+    });
+
 
     res.json({
       message: "News deleted successfully",
     });
+
   } catch (error) {
     console.log(error);
 
@@ -57,5 +77,6 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+
 
 module.exports = router;

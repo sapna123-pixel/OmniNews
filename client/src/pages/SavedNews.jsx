@@ -8,9 +8,16 @@ function SavedNews() {
   useEffect(() => {
     async function fetchSavedNews() {
       try {
-        const response = await axios.get(
-          "https://omninews-qs4j.onrender.com/api/saved-news"
-        );
+        const token = localStorage.getItem("token");
+
+    const response = await axios.get(
+  "https://omninews-qs4j.onrender.com/api/saved-news",
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
         setSavedNews(response.data);
       } catch (error) {
@@ -26,7 +33,16 @@ function SavedNews() {
 
   async function handleDelete(id) {
   try {
-    await axios.delete(`https://omninews-qs4j.onrender.com/api/saved-news/${id}`);
+    const token = localStorage.getItem("token");
+
+await axios.delete(
+  `https://omninews-qs4j.onrender.com/api/saved-news/${id}`,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
     setSavedNews(
       savedNews.filter((article) => article._id !== id)
