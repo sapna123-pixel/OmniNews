@@ -1,48 +1,74 @@
 # 📰 OmniNews - AI Powered News Platform
 
-OmniNews is a MERN stack based AI-powered news application that provides news from multiple sources in one place with AI-generated summaries and personalized saving features.
+OmniNews is a MERN stack-based AI-powered news application that delivers the latest news from multiple trusted sources, generates AI-powered summaries, and allows users to securely save articles with personalized authentication.
+
+---
 
 ## 🚀 Features
 
-- 🤖 **AI News Summary**  
-  Generates concise 2–3 line summaries for news articles.
+### 🔐 User Authentication
+- User Registration
+- Secure Login using JWT Authentication
+- Password encryption using bcrypt.js
+- Protected routes
+- User-specific saved news
 
-- 📂 **Category-wise News**  
-  Browse General, Business, Science, Technology, Sports, Entertainment, and Health news.
+### 🤖 AI News Summary
+- Generates concise AI-powered summaries for news articles.
+- Helps users quickly understand key highlights.
 
-- 🌐 **All News in One Place**  
-  Fetches and displays news from multiple trusted sources.
+### 📂 Category-wise News
+Browse news by category:
+- General
+- Business
+- Technology
+- Science
+- Health
+- Sports
+- Entertainment
 
-- 🔥 **Trending Today**  
-  Shows top trending headlines of the day.
+### 🌐 All News in One Place
+Fetches and displays the latest news from multiple trusted sources.
 
-- 🌙 **Dark Mode**  
-  Light/Dark theme support for better reading experience.
+### 🔥 Trending Today
+Displays the top trending headlines of the day.
 
-- ⭐ **Save for Later**  
-  Save articles, store them in MongoDB, view them on Saved News page, and remove anytime.
+### 🌙 Dark Mode
+Light and Dark theme support for a better reading experience.
 
-## 🛠️ Tech Stack
+### ⭐ Save for Later
+- Save favorite news articles
+- View saved articles anytime
+- Delete saved articles
+- Each user can access only their own saved news
 
-**Frontend**
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
 - React.js
 - Bootstrap
 - Axios
+- React Router DOM
 
-**Backend**
+## Backend
 - Node.js
 - Express.js
+- JWT Authentication
+- bcrypt.js
 
-**Database**
+## Database
 - MongoDB
 - Mongoose
 
-**APIs**
+## APIs
 - News API
-- AI Summary API
+- Groq AI API
 
-- ## 🌐 Live Demo
+---
 
-https://omninewss.netlify.app/
+# 🌐 Live Demo
+https://omninews.netlify.app/
 
 
